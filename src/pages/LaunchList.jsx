@@ -36,7 +36,7 @@ function LaunchList() {
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [searchQuery, dispatch]);
+  }, [searchQuery, dispatch, debounceTimer]);
 
   useEffect(() => {
     if (!loadMoreRef.current || !hasMore || loading) return;

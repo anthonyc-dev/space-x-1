@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 
 function LaunchCard({ launch, onView }) {
-  const { name, date_utc, success, rocket, links, details } = launch;
+  const { name, date_utc, success, rocket, links } = launch;
 
   const formatDate = (date) => {
     if (!date) return "Unknown";
