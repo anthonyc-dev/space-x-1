@@ -17,26 +17,26 @@ function LaunchList() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLaunch, setSelectedLaunch] = useState(null);
   const loadMoreRef = useRef(null);
-  const [debounceTimer, setDebounceTimer] = useState(null);
+  const debounceTimerRef = useRef(null);
 
   useEffect(() => {
-    dispatch(fetchLaunches({ page: 1, query: 'CRS-26' }));
+    dispatch(fetchLaunches({ page: 1, query: '' }));
   }, [dispatch]);
 
   useEffect(() => {
-    if (debounceTimer) clearTimeout(debounceTimer);
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
     
     const timer = setTimeout(() => {
       dispatch(resetLaunches());
       dispatch(fetchLaunches({ page: 1, query: searchQuery }));
     }, 500);
 
-    setDebounceTimer(timer);
+    debounceTimerRef.current = timer;
 
     return () => {
       if (timer) clearTimeout(timer);
     };
-  }, [searchQuery, dispatch, debounceTimer]);
+  }, [searchQuery, dispatch]);
 
   useEffect(() => {
     if (!loadMoreRef.current || !hasMore || loading) return;
